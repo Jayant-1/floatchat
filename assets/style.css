@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap");
+
+:root {
+  --bg-0: #0b1220; /* deep navy */
+  --bg-1: #0f172a; /* slate-900 */
+  --bg-2: #111827; /* gray-900 */
+  --text-0: #e5f9ff; /* light cyan text */
+  --muted: #94a3b8; /* slate-400 */
+  --neon: #22d3ee; /* cyan-400 */
+  --teal: #14b8a6; /* teal-500 */
+  --blue: #38bdf8; /* sky-400 */
+  --card: #0b1220; /* card background */
+  --border: rgba(34, 211, 238, 0.18);
+  --radius: 12px;
+}
+
+/* Soften background to cleaner gradient and remove heavy bubbles/waves visuals from default use */
+html,
+body {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 6, 23, 0.92),
+    rgba(2, 6, 23, 0.96)
+  );
+}
+
+/* Typography */
+.stApp {
+  font-family: "Inter", "Poppins", ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial;
+  color: var(--text-0);
+}
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3 {
+  color: var(--text-0);
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.15);
+}
+
+/* Sidebar header/logo */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo img {
+  height: 28px;
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.35));
+}
+.sidebar-logo .brand {
+  font-weight: 700;
+  color: var(--text-0);
+  letter-spacing: 0.2px;
+}
+
+/* Cards and containers */
+.ocean-card {
+  background: linear-gradient(
+      180deg,
+      rgba(34, 211, 238, 0.06),
+      rgba(20, 184, 166, 0.04)
+    ),
+    var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  padding: 1rem 1.25rem;
+  transition: transform 220ms ease, box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+.ocean-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(2, 6, 23, 0.8), 0 0 20px rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.35);
+}
+
+/* Card polish */
+.ocean-card {
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.01)
+    ),
+    var(--card);
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+.ocean-card:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 12px rgba(34, 211, 238, 0.12);
+}
+
+/* Neon buttons */
+.neon-btn button,
+.stDownloadButton button {
+  background: linear-gradient(120deg, var(--blue), var(--teal));
+  color: #001018;
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 0 0 rgba(34, 211, 238, 0), 0 8px 24px rgba(34, 211, 238, 0.15);
+  transition: transform 150ms ease, box-shadow 250ms ease, filter 250ms ease;
+}
+.neon-btn button:hover,
+.stDownloadButton button:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.45),
+    0 10px 30px rgba(34, 211, 238, 0.25);
+  filter: saturate(1.1);
+}
+
+/* Trim strong neon; keep subtle */
+.neon-btn button,
+.stDownloadButton button {
+  box-shadow: 0 6px 16px rgba(34, 211, 238, 0.18);
+}
+.neon-btn button:hover,
+.stDownloadButton button:hover {
+  box-shadow: 0 10px 24px rgba(34, 211, 238, 0.28);
+}
+
+/* Chat typing cursor */
+.typing-cursor::after {
+  content: "|";
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--neon);
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Floating ocean icon */
+.floating-icon {
+  position: fixed;
+  left: 12px;
+  top: 80px;
+  z-index: 9999;
+  font-size: 28px;
+  animation: floatY 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.45));
+}
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Ripple loader */
+.ripple {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin: 12px auto;
+}
+.ripple div {
+  position: absolute;
+  border: 3px solid var(--neon);
+  opacity: 1;
+  border-radius: 50%;
+  animation: ripple 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.ripple div:nth-child(2) {
+  animation-delay: -0.75s;
+}
+@keyframes ripple {
+  0% {
+    top: 26px;
+    left: 26px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 54px;
+    height: 54px;
+    opacity: 0;
+  }
+}
+
+/* Remove default bubbles/waves usage classes without deleting them (in case reused) */
+.bubbles {
+  display: none;
+}
+.ocean-footer {
+  display: none;
+}
+
+/* Map tooltip dark theme */
+.deckgl-tooltip {
+  background: rgba(2, 6, 23, 0.95);
+  color: var(--text-0);
+  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Download card content */
+.download-option {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.download-option .format {
+  font-weight: 600;
+  color: var(--text-0);
+}
+.download-option .desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Inputs with neon focus */
+input,
+select,
+textarea,
+.stSlider,
+.stSelectbox {
+  accent-color: var(--neon);
+}
+.stSelectbox div[data-baseweb="select"] > div,
+.stSlider > div {
+  border-radius: 12px;
+}
+:focus-visible {
+  outline-color: var(--neon);
+}
+
+/* Smooth fades */
+.fade-in {
+  animation: fadeIn 300ms ease both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Top navbar */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 18, 32, 0.75);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+.topnav-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topnav .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--text-0);
+}
+.topnav .brand img {
+  height: 22px;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.35));
+}
+.topnav .links {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+.topnav .links a {
+  color: var(--text-0);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background 180ms ease, box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+.topnav .links a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+/* Chat bubbles */
+.chat-bubble {
+  display: inline-block;
+  max-width: 78%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  margin: 6px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+.chat-user {
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+}
+.chat-assistant {
+  background: rgba(20, 184, 166, 0.16);
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  box-shadow: 0 0 16px rgba(20, 184, 166, 0.35);
+}
+.chat-row {
+  display: flex;
+}
+.chat-row.user {
+  justify-content: flex-end;
+}
+.chat-row.assistant {
+  justify-content: flex-start;
+}
+
+/* Typing dots */
+.typing-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+.typing-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--neon);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
+  animation: bounce 1s ease-in-out infinite;
+}
+.typing-dots .dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dots .dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Hide Streamlit Deploy button and three-dots main menu */
+.stDeployButton,
+.stAppDeployButton {
+  display: none !important;
+}
+#MainMenu {
+  visibility: hidden !important;
+}
+[data-testid="main-menu-button"],
+[data-testid="stToolbar"] {
+  display: none !important;
+}
+.st-emotion-cache-zy6yx3 {
+  padding: 5rem 1rem 8rem;
+}
+.st-emotion-cache-184gy18 {
+  padding: 5rem 1rem 8rem;
+}
