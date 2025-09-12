@@ -165,10 +165,11 @@ floatchat2/
 #### `requirements.txt`
 - **Purpose**: Python package dependencies
 - **Key Packages**:
-  - `streamlit`: Web framework
-  - `plotly`: Interactive visualizations
-  - `folium`: Interactive maps
-  - `pandas`, `numpy`: Data processing
+  - `streamlit`: Web framework and UI components
+  - `plotly`, `altair`: Interactive visualizations
+  - `folium`, `pydeck`: Interactive maps and geospatial visualization
+  - `pandas`, `numpy`, `pyarrow`: Data processing and analysis
+  - `streamlit-folium`, `extra-streamlit-components`: UI extensions
   - `requests`: API interactions
 
 ### Deployment Files
