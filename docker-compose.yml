@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  floatchat:
+    build: .
+    container_name: floatchat-app
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_ENV=production
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./data:/app/data  # Mount data directory if needed
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - floatchat-network
+
+  # Optional: Add Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: floatchat-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - floatchat-network
+
+  # Optional: Add PostgreSQL for data storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: floatchat-db
+    environment:
+      - POSTGRES_DB=floatchat
+      - POSTGRES_USER=floatchat
+      - POSTGRES_PASSWORD=floatchat_secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - floatchat-network
+
+volumes:
+  redis_data:
+  postgres_data:
+
+networks:
+  floatchat-network:
+    driver: bridge

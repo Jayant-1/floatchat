@@ -1,31 +1,48 @@
-# syntax=docker/dockerfile:1
-FROM python:3.12-slim
+# FloatChat Dockerfile
+# Smart India Hackathon 2025
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+FROM python:3.13-slim
 
+# Set working directory
 WORKDIR /app
 
-# System deps
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     build-essential \
+    curl \
+    software-properties-common \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy and install deps first (better layer caching)
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+# Copy requirements first for better caching
+COPY requirements.txt .
 
-# Copy app
-COPY . .
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose default Streamlit port
+# Copy application code
+COPY src/ ./src/
+COPY .streamlit/ ./.streamlit/
+COPY README.md .
+COPY start_floatchat.sh .
+
+# Make startup script executable
+RUN chmod +x start_floatchat.sh
+
+# Create non-root user
+RUN useradd -m -s /bin/bash floatchat
+RUN chown -R floatchat:floatchat /app
+USER floatchat
+
+# Expose port
 EXPOSE 8501
 
-# Environment
-ENV STREAMLIT_SERVER_HEADLESS=true \
-    STREAMLIT_SERVER_PORT=8501 \
-    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+# Health check
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-# Run
-CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0"] 
+# Start command
+CMD ["streamlit", "run", "src/main.py", "--server.address", "0.0.0.0", "--server.port", "8501"]

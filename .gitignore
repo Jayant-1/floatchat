@@ -1,0 +1,154 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === Virtual Environments ===
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.env/
+
+# === Environment Variables & Secrets ===
+.env
+.env.local
+.env.*.local
+*.key
+secrets.json
+config.json
+
+# === IDE & Editors ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Streamlit ===
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# === Database Files ===
+*.db
+*.sqlite
+*.sqlite3
+floatchat.db
+database.db
+
+# === Logs ===
+*.log
+logs/
+log/
+
+# === Data Files ===
+data/
+datasets/
+*.csv
+*.nc
+*.netcdf
+*.h5
+*.hdf5
+*.parquet
+downloads/
+exports/
+
+# === Cache & Temporary Files ===
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ipynb_checkpoints
+*.tmp
+temp/
+tmp/
+
+# === Jupyter Notebooks ===
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# === OS Generated ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# === Docker ===
+.dockerignore
+docker-compose.override.yml
+
+# === Deployment ===
+.vercel
+.netlify
+render-build/
+
+# === API Keys & Tokens ===
+openai_key.txt
+api_keys.txt
+tokens/
+
+# === Documentation Build ===
+docs/_build/
+site/
+
+# === Backup Files ===
+*.bak
+*.backup
+*~
+
+# === Profiling ===
+.prof
+
+# === Testing Coverage ===
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# === Specific to FloatChat ===
+# Chat history exports (keep examples)
+chat_exports/
+!chat_exports/example.json
+
+# Generated ocean data
+ocean_data/
+argo_data/
+float_profiles/
+
+# User uploads
+uploads/
+user_data/
