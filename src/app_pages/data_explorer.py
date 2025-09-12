@@ -118,7 +118,7 @@ def render_data_explorer_page():
             show_salinity_analysis()
     
     with quick_options[2]:
-        if st.button("� Depth Profiles", use_container_width=True):
+        if st.button("⚓︎ Depth Profiles", use_container_width=True):
             show_depth_analysis()
     
     with quick_options[3]:
@@ -189,7 +189,7 @@ def show_salinity_analysis():
 
 def show_depth_analysis():
     """Show depth profile analysis"""
-    st.markdown("### ↕ Depth Profile Analysis")
+    st.markdown("### ⚓︎ Depth Profile Analysis")
     
     # Generate temperature vs depth data for different regions
     depths = np.arange(0, 1000, 25)
