@@ -189,7 +189,7 @@ def show_salinity_analysis():
 
 def show_depth_analysis():
     """Show depth profile analysis"""
-    st.markdown("### � Depth Profile Analysis")
+    st.markdown("### ↕ Depth Profile Analysis")
     
     # Generate temperature vs depth data for different regions
     depths = np.arange(0, 1000, 25)
