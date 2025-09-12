@@ -14,7 +14,6 @@ ENV PYTHONDONTWRITEBYTECODE=1
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
-    software-properties-common \
     git \
     && rm -rf /var/lib/apt/lists/*
 
@@ -26,9 +25,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY src/ ./src/
-COPY .streamlit/ ./.streamlit/
 COPY README.md .
 COPY start_floatchat.sh .
+
+# Create .streamlit directory and copy config
+RUN mkdir -p ./.streamlit
+COPY .streamlit/* ./.streamlit/
 
 # Make startup script executable
 RUN chmod +x start_floatchat.sh
