@@ -31,23 +31,27 @@ FloatChat leverages cutting-edge AI technology to make ARGO float data accessibl
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/Jayant-1/floatchat.git
    cd floatchat
    ```
 
 2. **Create and activate virtual environment:**
+
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Run the application:**
+
    ```bash
    streamlit run src/main.py
    ```
@@ -59,6 +63,7 @@ FloatChat leverages cutting-edge AI technology to make ARGO float data accessibl
 ## 🚀 Deployment
 
 ### Deploy on Render
+
 This application is configured for easy deployment on Render:
 
 1. **Fork/Clone** this repository
@@ -69,7 +74,8 @@ This application is configured for easy deployment on Render:
    - Start the application with the correct Streamlit command
 
 ### Live Demo
-🌐 **[View Live Application](https://your-render-app-url.onrender.com)** *(Update with your Render URL)*
+
+🌐 **[View Live Application](https://your-render-app-url.onrender.com)** _(Update with your Render URL)_
 
 ## 📋 Application Structure
 
@@ -96,35 +102,41 @@ floatchat2/
 ## 🎮 Using FloatChat
 
 ### 1. 🏠 Home Page
+
 - Project overview and key features
 - Quick navigation to different sections
 - Platform statistics and recent updates
 
 ### 2. 🗺️ ARGO Floats Map
+
 - Interactive world map with float locations
 - Filter by region, status, and float type
 - Click floats for detailed profiles
 - View trajectory data and oceanographic measurements
 
 ### 3. 📊 Data Explorer
+
 - Natural language query interface
 - Advanced filtering and analysis tools
 - Generate visualizations and comparisons
 - Export data in multiple formats
 
 ### 4. 🤖 FloatChat AI
+
 - Conversational interface for ocean data
 - Ask questions in natural language
 - Get intelligent insights and recommendations
 - Export chat history and results
 
 ### 5. 📚 Research & About
+
 - Comprehensive project documentation
 - Research applications and case studies
 - Technical references and bibliography
 - Team information and credits
 
 ### 6. ⚙️ Admin Dashboard
+
 - System monitoring and performance metrics
 - Data management and quality control
 - User analytics and usage patterns
