@@ -18,7 +18,7 @@ LOCK_PATH = "floatchat_history.lock"
 SHELVE_FILENAME = "floatchat_history"
 JSON_FALLBACK = "floatchat_history.json"
 
-st.set_page_config(page_title="FloatChat", page_icon="🤖", layout="centered")
+# Note: st.set_page_config() is handled by main.py, not individual pages
 
 # --- Persistence helpers ---
 def _acquire_lock(lock_path):

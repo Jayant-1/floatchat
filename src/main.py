@@ -107,8 +107,8 @@ def main():
         render_data_explorer_page()
     
     elif selected_page == "FloatChat AI":
-        from app_pages.chatbot import render_chatbot_page
-        render_chatbot_page()
+        from app_pages.chatbot import render_floatchat
+        render_floatchat()
     
     elif selected_page == "Admin Dashboard":
         from app_pages.admin import render_admin_page

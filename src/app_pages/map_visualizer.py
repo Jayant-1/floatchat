@@ -8,7 +8,7 @@ from streamlit_folium import st_folium
 import pandas as pd
 import numpy as np
 from utils.ui_components import render_status_indicator, render_info_box, render_data_table
-from data_generator import DataGenerator  # make sure your generator is imported
+from utils.data_generator import DataGenerator
 
 # --- Ocean bounding boxes ---
 OCEAN_REGIONS = {
