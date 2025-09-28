@@ -32,8 +32,8 @@ FloatChat leverages cutting-edge AI technology to make ARGO float data accessibl
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/floatchat/ai-ocean.git
-   cd floatchat2
+   git clone https://github.com/Jayant-1/floatchat.git
+   cd floatchat
    ```
 
 2. **Create and activate virtual environment:**
@@ -49,13 +49,27 @@ FloatChat leverages cutting-edge AI technology to make ARGO float data accessibl
 
 4. **Run the application:**
    ```bash
-   cd src
-   streamlit run main.py
+   streamlit run src/main.py
    ```
 
 5. **Open your browser:**
    - Navigate to `http://localhost:8501`
    - Start exploring ocean data!
+
+## 🚀 Deployment
+
+### Deploy on Render
+This application is configured for easy deployment on Render:
+
+1. **Fork/Clone** this repository
+2. **Connect** to Render (it will auto-detect the render.yaml configuration)
+3. **Deploy** - Render will automatically:
+   - Install dependencies from requirements.txt
+   - Use Python 3.11.10 (specified in runtime.txt)
+   - Start the application with the correct Streamlit command
+
+### Live Demo
+🌐 **[View Live Application](https://your-render-app-url.onrender.com)** *(Update with your Render URL)*
 
 ## 📋 Application Structure
 
