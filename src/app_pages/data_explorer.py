@@ -10,13 +10,16 @@ import pandas as pd
 import numpy as np
 from utils.ui_components import render_data_table, render_info_box, render_chat_sidebar
 from utils.config import DATA_CONFIG
+from utils.data_generator import DataGenerator   # ✅ import your generator
+
 
 def render_data_explorer_page():
     """Render the data explorer and query interface page"""
-    
-    # Render chat interface in sidebar
-    render_chat_sidebar()
-    
+
+    # ✅ Ensure DataGenerator is initialized in session state
+    if "data_generator" not in st.session_state:
+        st.session_state.data_generator = DataGenerator()
+
     st.markdown("## 📊 Data Explorer & Analysis Interface")
     st.markdown("Explore and analyze ARGO ocean data using advanced filters and quick analysis tools.")
     
@@ -29,14 +32,12 @@ def render_data_explorer_page():
     with col1:
         st.markdown("#### Geographic Filters")
         
-        # Region selection
         selected_regions = st.multiselect(
             "Ocean Regions",
             DATA_CONFIG["ocean_regions"],
             default=["Arabian Sea", "Bay of Bengal"]
         )
         
-        # Coordinate ranges
         lat_range = st.slider(
             "Latitude Range",
             min_value=-90.0,
@@ -56,21 +57,18 @@ def render_data_explorer_page():
     with col2:
         st.markdown("#### Parameter Filters")
         
-        # Parameter selection
         selected_parameters = st.multiselect(
             "Parameters to Analyze",
             DATA_CONFIG["parameters"],
             default=["Temperature", "Salinity"]
         )
         
-        # Depth range
         depth_range = st.select_slider(
             "Depth Range (m)",
             options=DATA_CONFIG["depth_ranges"],
             value=(0, 500)
         )
         
-        # Date range
         date_range = st.date_input(
             "Date Range",
             value=(pd.to_datetime("2024-01-01"), pd.to_datetime("2025-09-11")),
@@ -108,22 +106,30 @@ def render_data_explorer_page():
     st.markdown("### ⚡ Quick Analysis")
     
     quick_options = st.columns(4)
+
+    # ✅ Create a placeholder so results are full-width under buttons
+    analysis_placeholder = st.container()
     
     with quick_options[0]:
-        if st.button("🌡️ Temperature Overview", use_container_width=True):
-            show_temperature_overview()
+        if st.button("🌡️ Temperature Overview", use_container_width=True, key="temp_overview"):
+            with analysis_placeholder:
+                show_temperature_overview()
     
     with quick_options[1]:
-        if st.button("🧂 Salinity Analysis", use_container_width=True):
-            show_salinity_analysis()
+        if st.button("🧂 Salinity Analysis", use_container_width=True, key="salinity_analysis"):
+            with analysis_placeholder:
+                show_salinity_analysis()
     
     with quick_options[2]:
-        if st.button("⚓︎ Depth Profiles", use_container_width=True):
-            show_depth_analysis()
+        if st.button("⚓︎ Depth Profiles", use_container_width=True, key="depth_profiles"):
+            with analysis_placeholder:
+                show_depth_analysis()
     
     with quick_options[3]:
-        if st.button("🌊 Regional Comparison", use_container_width=True):
-            show_regional_comparison()
+        if st.button("🌊 Regional Comparison", use_container_width=True, key="regional_comparison"):
+            with analysis_placeholder:
+                show_regional_comparison()
+
 
 def execute_advanced_query(regions, lat_range, lon_range, parameters, depth_range, date_range, analysis_type, aggregation, viz_type):
     """Execute advanced query with filters"""
@@ -134,7 +140,6 @@ def execute_advanced_query(regions, lat_range, lon_range, parameters, depth_rang
         import time
         time.sleep(1)
         
-        # Generate sample data based on parameters
         if analysis_type == "Regional Comparison":
             show_regional_comparison_analysis(regions, parameters)
         elif analysis_type == "Time Series":
@@ -146,11 +151,11 @@ def execute_advanced_query(regions, lat_range, lon_range, parameters, depth_rang
         else:
             show_anomaly_detection(parameters[0] if parameters else "Temperature")
 
+
 def show_temperature_overview():
     """Show temperature overview analysis"""
     st.markdown("### 🌡️ Temperature Overview")
     
-    # Generate temperature data
     regions = ["Arabian Sea", "Bay of Bengal", "Indian Ocean"]
     temp_data = []
     
@@ -161,19 +166,17 @@ def show_temperature_overview():
     
     df = pd.DataFrame(temp_data)
     
-    # Create visualization
     fig = px.box(df, x="region", y="temperature", title="Temperature Distribution by Region")
     st.plotly_chart(fig, use_container_width=True)
     
-    # Summary statistics
     summary = df.groupby('region')['temperature'].agg(['mean', 'std', 'min', 'max']).round(2)
     render_data_table(summary.reset_index(), "Temperature Statistics by Region")
+
 
 def show_salinity_analysis():
     """Show salinity analysis"""
     st.markdown("### 🧂 Salinity Analysis")
     
-    # Generate depth vs salinity data
     depths = np.arange(0, 1000, 50)
     salinity = 35 + np.random.normal(0, 0.5, len(depths))
     
@@ -187,20 +190,17 @@ def show_salinity_analysis():
     )
     st.plotly_chart(fig, use_container_width=True)
 
+
 def show_depth_analysis():
     """Show depth profile analysis"""
     st.markdown("### ⚓︎ Depth Profile Analysis")
     
-    # Generate temperature vs depth data for different regions
     depths = np.arange(0, 1000, 25)
-    
     fig = go.Figure()
     
-    # Arabian Sea profile
     temp_arabian = 28 * np.exp(-depths / 800) + 4 + np.random.normal(0, 0.5, len(depths))
     fig.add_trace(go.Scatter(x=temp_arabian, y=-depths, mode='lines', name='Arabian Sea', line=dict(color='red')))
     
-    # Bay of Bengal profile  
     temp_bengal = 29 * np.exp(-depths / 750) + 3.5 + np.random.normal(0, 0.5, len(depths))
     fig.add_trace(go.Scatter(x=temp_bengal, y=-depths, mode='lines', name='Bay of Bengal', line=dict(color='blue')))
     
@@ -212,11 +212,11 @@ def show_depth_analysis():
     )
     st.plotly_chart(fig, use_container_width=True)
 
+
 def show_regional_comparison():
     """Show regional comparison analysis"""
     st.markdown("### 🌊 Regional Comparison")
     
-    # Generate comparison data
     comparison_data = st.session_state.data_generator.generate_comparison_data(
         ["Arabian Sea", "Bay of Bengal", "Indian Ocean"], "Temperature"
     )
@@ -226,14 +226,19 @@ def show_regional_comparison():
     
     render_data_table(comparison_data.head(20), "Sample Comparison Data")
 
+
 def show_regional_comparison_analysis(regions, parameters):
     """Show detailed regional comparison"""
-    comparison_data = st.session_state.data_generator.generate_comparison_data(regions, parameters[0] if parameters else "Temperature")
+    comparison_data = st.session_state.data_generator.generate_comparison_data(
+        regions, parameters[0] if parameters else "Temperature"
+    )
     
-    fig = px.box(comparison_data, x="region", y="value", title=f"{parameters[0] if parameters else 'Parameter'} Comparison Across Regions")
+    fig = px.box(comparison_data, x="region", y="value", 
+                 title=f"{parameters[0] if parameters else 'Parameter'} Comparison Across Regions")
     st.plotly_chart(fig, use_container_width=True)
     
     render_data_table(comparison_data.head(50), f"{parameters[0] if parameters else 'Parameter'} Comparison Data")
+
 
 def show_time_series_analysis(parameter):
     """Show time series analysis"""
@@ -241,6 +246,7 @@ def show_time_series_analysis(parameter):
     
     fig = px.line(time_series_data, x='date', y='value', title=f"{parameter} Time Series - Arabian Sea")
     st.plotly_chart(fig, use_container_width=True)
+
 
 def show_profile_analysis(parameters):
     """Show profile analysis"""
@@ -258,10 +264,10 @@ def show_profile_analysis(parameters):
     fig.update_layout(height=400, title="Multi-Parameter Profile Analysis")
     st.plotly_chart(fig, use_container_width=True)
 
+
 def show_correlation_analysis(parameters):
     """Show correlation analysis"""
     if len(parameters) >= 2:
-        # Generate correlation data
         n = 100
         data = {}
         for param in parameters:
@@ -275,12 +281,12 @@ def show_correlation_analysis(parameters):
     else:
         st.warning("Please select at least 2 parameters for correlation analysis.")
 
+
 def show_anomaly_detection(parameter):
     """Show anomaly detection analysis"""
     dates = pd.date_range('2024-01-01', periods=100, freq='D')
     values = np.random.randn(100) * 2 + 25
     
-    # Add some anomalies
     anomalies = np.random.choice(100, 5, replace=False)
     values[anomalies] += np.random.choice([-1, 1], 5) * np.random.uniform(5, 10, 5)
     

@@ -144,6 +144,9 @@ coverage.xml
 chat_exports/
 !chat_exports/example.json
 
+# FloatChat history files
+floatchat_history.*
+
 # Generated ocean data
 ocean_data/
 argo_data/

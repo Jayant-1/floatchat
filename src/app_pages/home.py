@@ -10,17 +10,21 @@ def render_home_page():
     
     # Project introduction
     st.markdown("""
-    ## 🌊 Welcome to FloatChat
-    
-    **Advanced ARGO Ocean Data Analysis Platform** - A streamlined platform that provides powerful 
-    tools for exploring and analyzing oceanographic data from the global ARGO float network.
-    
-    ### 🎯 Project Overview
-    
-    FloatChat focuses on four core oceanographic parameters: **Temperature**, **Salinity**, **Depth**, 
-    and **Location**. Our platform provides interactive mapping, advanced filtering, and AI-powered 
-    insights to make ARGO float data accessible for researchers, policymakers, and ocean enthusiasts.
-    """)
+   ## 🌊 Welcome to FloatChat
+
+**Advanced ARGO Ocean Data Analysis Platform** – a streamlined platform that provides powerful tools for exploring and analyzing oceanographic data from the global ARGO float network.
+
+### 🎯 Project Overview
+
+FloatChat focuses on four core oceanographic parameters: **Temperature**, **Salinity**, **Depth**, and **Location**.  
+
+But what makes FloatChat truly unique is its **AI-powered conversational interface**:  
+- Ask questions in **natural language** about oceanographic data.  
+- Get **instant answers**, interactive **charts**, and **real-time maps**.  
+- Explore **regional trends**, **float locations**, and **depth profiles** without writing a single line of code.  
+
+With FloatChat, researchers, policymakers, and ocean enthusiasts can **interact with ARGO float data like having a personal oceanographic assistant**—making complex datasets accessible, insightful, and engaging.
+""")
     
     # Key metrics
     st.markdown("### 📊 Platform Statistics")
@@ -62,7 +66,7 @@ def render_home_page():
         
         render_feature_card(
             "AI-Powered Chat",
-            "Get intelligent responses about ocean data patterns and specific float information",
+            "Get intelligent responses about ocean data patterns and specific argo float information",
             "💬",
             "135deg, #9467bd 0%, #8c564b 100%"
         )
