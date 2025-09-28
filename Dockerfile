@@ -30,7 +30,6 @@ COPY start_floatchat.sh .
 
 # Create .streamlit directory and copy config
 RUN mkdir -p ./.streamlit
-COPY .streamlit/ ./.streamlit/
 
 
 # Make startup script executable
