@@ -17,6 +17,7 @@ pydeck>=0.9.0
 
 # UI Components & Extensions
 extra-streamlit-components>=0.1.80
+streamlit-option-menu>=0.4.0
 
 # Utilities
 requests>=2.32.0
