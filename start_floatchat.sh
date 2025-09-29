@@ -74,7 +74,7 @@ echo ""
 echo "================================================================"
 
 # Start Streamlit application
-streamlit run main.py --server.headless=true --server.address=0.0.0.0 --server.port=8501
+streamlit run main2.py --server.headless=true --server.address=0.0.0.0 --server.port=8501
 
 echo ""
 echo "👋 FloatChat application stopped. Thank you for using our platform!"
